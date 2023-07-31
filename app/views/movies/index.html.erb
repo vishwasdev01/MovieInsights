@@ -1,0 +1,51 @@
+<!-- app/views/movies/index.html.erb -->
+<style>
+  /* CSS Styles for the Movies List */
+  .movies-container {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+
+  .movie {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  .movie h2 {
+    margin-top: 0;
+  }
+
+  .movie p {
+    margin: 5px 0;
+  }
+
+  /* Optional: Add some styling for the heading */
+  .movies-heading {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+</style>
+ <%= form_with url: "/movies/search_by_actor", method: :get do |form| %>
+    <div class="search-bar">
+      <%= form.text_field :name, placeholder: "Search actors here..." %>
+      <%= form.submit "Search", class: "submit-btn" %>
+    </div>
+  <%end%>
+<div class="movies-container">
+  <h1 class="movies-heading">List of Movies</h1>
+
+  <% @movies.each do |movie| %>
+    <div class="movie">
+      <h2><%= movie.name %></h2>
+      <p><strong>Description:</strong> <%= movie.description %></p>
+      <p><strong>Director:</strong> <%= movie.director %></p>
+      <p><strong>Actors:</strong> <%= movie.actors.map(&:name) %></p>
+      <p><strong>Country:</strong> <%= movie.country.name %></p>
+      <p><strong>Filming Locations:</strong> <%= movie.country.filming_locations.map(&:name)%></p>
+      <p><strong>Reviews:</strong> <%= movie.reviews.map(&:review) %></p>
+
+
+    </div>
+  <% end %>
+</div>

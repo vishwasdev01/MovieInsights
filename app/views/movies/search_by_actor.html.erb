@@ -1,0 +1,11 @@
+<h1>Search Results</h1>
+<% if @actors.any? %>
+  <ul>
+    <% @actors.each do |actor| %>
+     Actor Name:  <li><%= actor.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No actors found for "<%= @query %>".</p>
+<% end %>
+<%= link_to 'Back', root_path%>
